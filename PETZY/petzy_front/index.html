@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petzy | Administración</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="brand-icon">🐾</span>
+            <h2>Petzy</h2>
+        </div>
+
+        <nav>
+            <a href="#inicio" class="nav-link" data-vista="inicio">Inicio</a>
+            <a href="#productos" class="nav-link" data-vista="productos">Productos</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            Sistema de gestión para mascotas
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <span class="status">● Sistema de administración</span>
+            <span id="estadoConexion" class="conexion">Conectando...</span>
+        </header>
+
+        <!-- Vista de inicio -->
+        <section id="vista-inicio" class="view">
+            <div class="welcome">
+                <p class="eyebrow">GESTIÓN DE TIENDA</p>
+                <h1>Bienvenido a Petzy</h1>
+                <p>Administra los productos de tu tienda para mascotas.</p>
+            </div>
+
+            <div class="stats">
+                <article class="stat-card">
+                    <p>Productos registrados</p>
+                    <h2 id="totalProductos">0</h2>
+                </article>
+
+                <article class="stat-card">
+                    <p>Categorías disponibles</p>
+                    <h2 id="totalCategorias">0</h2>
+                </article>
+            </div>
+        </section>
+
+        <!-- Vista de productos -->
+        <section id="vista-productos" class="view" hidden>
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Productos</h2>
+                        <p>Consulta y administra el inventario.</p>
+                    </div>
+
+                    <div class="header-actions">
+                        <button id="btnNuevaCategoria" class="btn-secondary">+ Nueva categoría</button>
+                        <button id="btnNuevoProducto" class="btn-primary">+ Nuevo producto</button>
+                    </div>
+                </div>
+
+                <div class="toolbar">
+                    <label for="filtroCategoria">Filtrar por categoría</label>
+                    <select id="filtroCategoria"></select>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaProductos">
+                            <tr><td colspan="5">Cargando productos...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <p id="mensaje" class="toast" role="status" aria-live="polite" hidden></p>
+
+        <!-- Ventana de producto -->
+        <dialog id="modalProducto">
+            <form id="formProducto">
+                <h2 id="tituloFormulario">Nuevo producto</h2>
+
+                <input type="hidden" id="productoId">
+
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" required maxlength="100">
+
+                <label for="precio">Precio (COP)</label>
+                <input id="precio" type="number" min="1" step="1" required>
+
+                <label for="stock">Stock</label>
+                <input id="stock" type="number" min="0" step="1" required>
+
+                <label for="categoria">Categoría</label>
+                <select id="categoria" required></select>
+                <p id="hintCategoria" class="hint" hidden>
+                    No hay categorías. Cierra esta ventana y crea una con «+ Nueva categoría».
+                </p>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-cerrar>Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar producto</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Ventana de categoría -->
+        <dialog id="modalCategoria">
+            <form id="formCategoria">
+                <h2>Nueva categoría</h2>
+
+                <label for="categoriaNombre">Nombre</label>
+                <input id="categoriaNombre" type="text" required maxlength="50">
+
+                <label for="categoriaDescripcion">Descripción (opcional)</label>
+                <input id="categoriaDescripcion" type="text" maxlength="200">
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" data-cerrar>Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar categoría</button>
+                </div>
+            </form>
+        </dialog>
+    </main>
+</body>
+</html>
